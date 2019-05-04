@@ -28,15 +28,18 @@ class MainActivity : BaseActivity<MainActivityVM>() {
 
     private val topRatedObserver =
         Observer<ApiResponse<List<Item>>> { response ->
-            itemsAdapter.clear()
-            itemsAdapter.addItems(response.results)
+            replaceData(response.results)
         }
 
     private val mostPopularObserver =
         Observer<ApiResponse<List<Item>>> { response ->
-            itemsAdapter.clear()
-            itemsAdapter.addItems(response.results)
+            replaceData(response.results)
         }
+
+    private fun replaceData(items: List<Item>) {
+        itemsAdapter.clear()
+        itemsAdapter.addItems(items)
+    }
 
     private fun initAdapter() {
         items.apply {
